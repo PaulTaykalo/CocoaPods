@@ -40,7 +40,7 @@ module Pod
             consumer = file_accessor.spec_consumer
             flags = compiler_flags_for_consumer(consumer)
             source_files = file_accessor.source_files
-            file_refs = source_files.map { |sf| project.reference_for_path(sf) }
+            file_refs = source_files.reject{|sf| sf.extname == ".d" }.map { |sf| project.reference_for_path(sf) }
             target.add_file_references(file_refs, flags)
           end
         end
